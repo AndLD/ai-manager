@@ -6,7 +6,7 @@ import { IAuthPostBody } from '../../utils/interfaces/auth'
 import { errorNotification } from '../../utils/notifications'
 import { validationRules } from '../../utils/validation'
 
-export default function SigninForm() {
+export default function SigninForm({ setIsSignUp }: { setIsSignUp: any }) {
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
     const [login] = useLoginMutation()
@@ -27,14 +27,20 @@ export default function SigninForm() {
         <Form form={form} name="basic" onFinish={onFinish} autoComplete="off" className="auth-form">
             <Form.Item
                 name="email"
-                rules={[validationRules.REQUIRED('Будь-ласка введіть Ваш email!'), validationRules.EMAIL()]}
+                rules={[
+                    validationRules.REQUIRED('please enter your email!'),
+                    validationRules.EMAIL(),
+                ]}
             >
                 <Input type="email" placeholder="Email" />
             </Form.Item>
 
             <Form.Item
                 name="password"
-                rules={[validationRules.REQUIRED('Будь-ласка введіть Ваш пароль!'), validationRules.PASSWORD()]}
+                rules={[
+                    validationRules.REQUIRED('please enter your password'),
+                    validationRules.PASSWORD(),
+                ]}
             >
                 <Input.Password placeholder="Password" />
             </Form.Item>
@@ -42,6 +48,15 @@ export default function SigninForm() {
             <div className="button">
                 <Button className="button" htmlType="submit" type="primary">
                     Log in
+                </Button>
+
+                <Button
+                    style={{ color: '#1677ff' }}
+                    className="button"
+                    onClick={() => setIsSignUp(true)}
+                    type="text"
+                >
+                    Register
                 </Button>
             </div>
         </Form>

@@ -2,16 +2,31 @@ import { BrowserRouter } from 'react-router-dom'
 import AppRoutes from './components/AppRoutes'
 import { chatContext } from './context'
 import useChatContextValue from './hooks/pages/chat'
+import { ConfigProvider } from 'antd'
+import './App.css'
 
 function App() {
     // useAuth()
 
     return (
-        <BrowserRouter>
-            <chatContext.Provider value={useChatContextValue()}>
-                <AppRoutes />
-            </chatContext.Provider>
-        </BrowserRouter>
+        <ConfigProvider
+            theme={{
+                token: {
+                    // Seed Token
+                    colorPrimary: '#00b96b',
+                    borderRadius: 2,
+
+                    // Alias Token
+                    colorBgContainer: '#f6ffed',
+                },
+            }}
+        >
+            <BrowserRouter>
+                <chatContext.Provider value={useChatContextValue()}>
+                    <AppRoutes />
+                </chatContext.Provider>
+            </BrowserRouter>
+        </ConfigProvider>
     )
 }
 

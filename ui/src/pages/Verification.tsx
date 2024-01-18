@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 // import { useToken } from '../hooks/auth'
 // import { useRefreshToken } from '../hooks/store/auth.api'
 import { useVerifyEmail } from '../hooks/store/users.api'
-import '../styles/Verification.scss'
+import '../styles/Verification.css'
 
 export default function Verification() {
     const [queryParams] = useSearchParams()

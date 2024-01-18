@@ -1,19 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
 
-export type Collection =
-    | 'users'
-    | 'clusters'
-    | 'nodes'
-    | 'connections'
-    | 'sources'
+export type Collection = 'users' | 'messages' | 'docs'
 
-export type Quota = 'clusters' | 'nodes' | 'sources'
+export type Quota = 'docs'
 
-export type Controller = (
-    req: Request,
-    res: Response,
-    next?: NextFunction
-) => any
+export type Controller = (req: Request, res: Response, next?: NextFunction) => any
 
 export type Error = {
     msg: string

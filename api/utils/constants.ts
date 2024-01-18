@@ -53,10 +53,8 @@ export const errors = {
 
 export const entities = {
     USERS: 'users' as Collection,
-    CLUSTERS: 'clusters' as Collection,
-    NODES: 'nodes' as Collection,
-    CONNECTIONS: 'connections' as Collection,
-    SOURCES: 'sources' as Collection,
+    MESSAGES: 'messages' as Collection,
+    DOCS: 'docs' as Collection,
 }
 
 export const validationConstants = {
@@ -72,7 +70,5 @@ export const validationConstants = {
 export const freeSubscriptionQuotas: {
     [key in Quota]: number
 } = {
-    clusters: 2,
-    nodes: 25, // nodes per cluster
-    sources: 10, // sources per cluster
+    docs: 1,
 }

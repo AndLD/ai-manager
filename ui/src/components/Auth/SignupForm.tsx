@@ -6,7 +6,7 @@ import { IUserPostBody } from '../../utils/interfaces/user'
 import { errorNotification } from '../../utils/notifications'
 import { validationRules } from '../../utils/validation'
 
-export default function SignupForm() {
+export default function SignupForm({ setIsSignUp }: { setIsSignUp: any }) {
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
     const [postUser] = usePostUserMutation()
@@ -32,8 +32,8 @@ export default function SignupForm() {
             <Form.Item
                 name="name"
                 rules={[
-                    validationRules.REQUIRED('Будь-ласка введіть ваше ім`я та прізвище!'),
-                    validationRules.NAME('Невірні ім`я та прізвище!')
+                    validationRules.REQUIRED('please enter your name'),
+                    validationRules.NAME('please enter your name'),
                 ]}
             >
                 <Input placeholder="Name" />
@@ -42,8 +42,8 @@ export default function SignupForm() {
             <Form.Item
                 name="email"
                 rules={[
-                    validationRules.EMAIL('Невірний email'),
-                    validationRules.REQUIRED('Будь-ласка введіть ваш email!')
+                    validationRules.EMAIL('wrong email'),
+                    validationRules.REQUIRED('please enter your email!'),
                 ]}
             >
                 <Input type="email" placeholder="Email" />
@@ -52,10 +52,10 @@ export default function SignupForm() {
             <Form.Item
                 name="password"
                 rules={[
-                    validationRules.REQUIRED('Будь-ласка введіть ваш пароль!'),
+                    validationRules.REQUIRED('please enter your password'),
                     validationRules.PASSWORD(
-                        'Пароль має містити 6-20 символів, хочаб одну цифру, велику та маленьку літери латинського алфавіту та спеціальний символ: -#$.%&@(){}[]!?+*'
-                    )
+                        'Password should contain from 6 to 20 chars, at lease one digit, lower and upper case letters and a special char: -#$.%&@(){}[]!?+*'
+                    ),
                 ]}
             >
                 <Input.Password placeholder="Password" />
@@ -64,6 +64,15 @@ export default function SignupForm() {
             <div className="button">
                 <Button className="button" htmlType="submit" type="primary">
                     Sign up
+                </Button>
+
+                <Button
+                    style={{ color: '#1677ff' }}
+                    className="button"
+                    onClick={() => setIsSignUp(false)}
+                    type="text"
+                >
+                    Sign in
                 </Button>
             </div>
         </Form>

@@ -10,11 +10,7 @@ import { Collection, Quota } from '../utils/types'
 
 const logger = getLogger('middlewares/auth')
 
-export async function isAuthorized(
-    req: any,
-    res: Response,
-    next: NextFunction
-) {
+export async function isAuthorized(req: any, res: Response, next: NextFunction) {
     if (!req.headers.authorization) {
         return apiUtils.sendError(res, errors.AUTHORIZATION_HEADER_EMPTY)
     }
@@ -52,12 +48,7 @@ export function hasUserStatus(req: any, res: Response, next: NextFunction) {
         return res.sendStatus(500)
     }
 
-    if (
-        status === 'user' ||
-        status === 'unlimited' ||
-        status === 'owner' ||
-        status === 'admin'
-    ) {
+    if (status === 'user' || status === 'unlimited' || status === 'owner' || status === 'admin') {
         return next()
     }
 
@@ -174,10 +165,8 @@ export function quotaNotReached(quotaType: Quota, clusterIdField = 'id') {
         const userId = req.user._id
 
         // Check if user has free quota
-        if (quotaType === 'clusters') {
-            const count = await db
-                .collection(quotaType)
-                .countDocuments({ userId })
+        if (quotaType === 'docs') {
+            const count = await db.collection(quotaType).countDocuments({ userId })
 
             if (count < freeSubscriptionQuotas[quotaType]) {
                 return next()
@@ -188,9 +177,7 @@ export function quotaNotReached(quotaType: Quota, clusterIdField = 'id') {
                 return res.sendStatus(500)
             }
 
-            const count = await db
-                .collection(quotaType)
-                .countDocuments({ clusterId })
+            const count = await db.collection(quotaType).countDocuments({ clusterId })
 
             if (count < freeSubscriptionQuotas[quotaType]) {
                 return next()

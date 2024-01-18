@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import reactLogo from '../assets/react.svg'
+import '../styles/Chat.css'
 
 export default function Chat() {
     const [message, setMessage] = useState('')
