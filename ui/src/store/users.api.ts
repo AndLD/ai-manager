@@ -3,6 +3,8 @@ import {
     IFetchUsersResponse,
     IUserPostBody,
     IUserPostResponse,
+    IUserPutBody,
+    IUserPutResponse,
 } from '../utils/interfaces/user'
 import { baseQueryWithRefresh } from '../utils/store'
 import { API_URL } from '../utils/constants'
@@ -10,7 +12,14 @@ import { API_URL } from '../utils/constants'
 export const privateUsersApi = createApi({
     reducerPath: '/api/private/users',
     baseQuery: baseQueryWithRefresh,
-    endpoints: (builder) => ({
+    endpoints: builder => ({
+        putUser: builder.mutation<IUserPutResponse, { id: string; body: IUserPutBody }>({
+            query: ({ id, body }) => ({
+                method: 'PUT',
+                url: `/api/private/users/${id}`,
+                body,
+            }),
+        }),
         fetchUsers: builder.query<
             IFetchUsersResponse,
             {
@@ -38,11 +47,8 @@ export const publicUsersApi = createApi({
         baseUrl: API_URL,
         credentials: 'include',
     }),
-    endpoints: (builder) => ({
-        fetchVerifyEmail: builder.query<
-            void,
-            { emailVerificationToken: string | null }
-        >({
+    endpoints: builder => ({
+        fetchVerifyEmail: builder.query<void, { emailVerificationToken: string | null }>({
             query: ({ emailVerificationToken }) => ({
                 url: '/api/public/users/verify',
                 params: {
@@ -52,7 +58,7 @@ export const publicUsersApi = createApi({
             }),
         }),
         postUser: builder.mutation<IUserPostResponse, IUserPostBody>({
-            query: (body) => ({
+            query: body => ({
                 method: 'POST',
                 url: '/api/public/users',
                 body,
@@ -61,5 +67,5 @@ export const publicUsersApi = createApi({
     }),
 })
 
-export const { useFetchUsersQuery } = privateUsersApi
+export const { useFetchUsersQuery, usePutUserMutation } = privateUsersApi
 export const { useFetchVerifyEmailQuery, usePostUserMutation } = publicUsersApi

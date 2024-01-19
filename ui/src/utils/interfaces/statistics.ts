@@ -2,10 +2,9 @@ import { UserStatus } from './user'
 
 export interface IStatistics {
     startTimestamp: number
-    users: { [key in UserStatus]: number }
-    clustersTotal: number
-    nodesTotal: number
-    connectionsTotal: number
+    usersByStatus: { [key in UserStatus]: number }
+    messagesTotal: number
+    docsTotal: number
 }
 
 export interface IFetchStatisticsResponse {

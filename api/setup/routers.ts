@@ -8,6 +8,7 @@ import { setReqEntity } from '../middlewares/decorators'
 import { entities } from '../utils/constants'
 import { statisticsPrivateRouter } from '../routers/private/statistics'
 import { docsPrivateRouter } from '../routers/private/docs'
+import { usersPrivateRouter } from '../routers/private/users'
 
 export function setupRouters(app: Express) {
     const apiRouter = Router()
@@ -25,6 +26,7 @@ export function setupRouters(app: Express) {
     apiRouter.use('/private', isAuthorized, privateRouter)
 
     privateRouter.use('/auth', authPrivateRouter)
+    privateRouter.use('/users', usersPrivateRouter)
     privateRouter.use('/messages', messagesPrivateRouter)
     privateRouter.use('/docs', docsPrivateRouter)
     privateRouter.use('/statistics', statisticsPrivateRouter)

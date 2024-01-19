@@ -2,13 +2,10 @@ import { useContext, useEffect, useReducer, useState } from 'react'
 import { layoutContext } from '../../context'
 
 export default function useLayoutContext() {
-    const [title, setTitle] = useReducer(
-        (state: string | null, newTitle: string | null) => {
-            document.title = newTitle || 'YG'
-            return newTitle
-        },
-        'YG'
-    )
+    const [title, setTitle] = useReducer((state: string | null, newTitle: string | null) => {
+        document.title = newTitle || 'ai manager'
+        return newTitle
+    }, 'ai manager')
     const [backPath, setBackPath] = useState<string | null>(null)
 
     return {

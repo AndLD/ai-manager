@@ -58,6 +58,7 @@ export interface IUserPost {
     status: UserStatus
     active: boolean
     keywords: string[]
+    createdAt: number
 
     company: string
     role: UserRole

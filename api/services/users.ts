@@ -1,17 +1,8 @@
 import bcrypt from 'bcrypt'
 import { Response } from 'express'
 import { apiUtils } from '../utils/api'
-import {
-    entities,
-    errors,
-    rootUser as rootUserConfig,
-} from '../utils/constants'
-import {
-    IUser,
-    IUserPost,
-    IUserPostBody,
-    UserStatus,
-} from '../utils/interfaces/user'
+import { entities, errors, rootUser as rootUserConfig } from '../utils/constants'
+import { IUser, IUserPost, IUserPostBody, UserStatus } from '../utils/interfaces/user'
 import { getKeywords } from '../utils/keywords'
 import { getLogger } from '../utils/logger'
 import { db } from './db'
@@ -70,10 +61,7 @@ async function getRootUser() {
 }
 
 // If 'res' argument not spesified, the function will add user with 'admin' status
-async function addUser(
-    body: IUserPostBody,
-    res?: Response
-): Promise<IUser | void> {
+async function addUser(body: IUserPostBody, res?: Response): Promise<IUser | void> {
     const hashedPassword: string = await bcrypt.hash(body.password, 10)
 
     const userObj: IUserPost = {
@@ -82,7 +70,8 @@ async function addUser(
         status: res ? 'user' : 'admin',
         active: !res,
         subscription: 'free',
-        keywords: getKeywords(body.email, body.name),
+        keywords: getKeywords(body.email, body.name, body.company, body.role),
+        createdAt: new Date().getTime(),
     }
 
     const result = await db.collection(entity).insertOne(userObj)
@@ -106,7 +95,7 @@ async function activateUser(userId: string, res: Response) {
         .collection(entity)
         .findOneAndUpdate(
             { _id: new ObjectId(userId), active: false },
-            { $set: { active: true } },
+            { $set: { active: true, updatedAt: new Date().getTime() } },
             { returnDocument: 'after', upsert: false }
         )
 
@@ -124,9 +113,7 @@ async function deleteInactiveUsers() {
         createdAt: { $lt: Date.now() - 24 * 60 * 60 * 1000 },
     })
 
-    logger.info(
-        `Cron: Deleted inactive users older 24 hours: ${result.deletedCount}`
-    )
+    logger.info(`Cron: Deleted inactive users older 24 hours: ${result.deletedCount}`)
 }
 
 export const usersService = {

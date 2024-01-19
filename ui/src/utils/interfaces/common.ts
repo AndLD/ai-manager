@@ -3,3 +3,9 @@ export interface IPagination {
     pageSize: number
     total?: number
 }
+
+export interface IPaginationBackend {
+    page: number
+    results: number
+    total?: number
+}

@@ -1,3 +1,5 @@
+import { IPaginationBackend } from './common'
+
 export type Subscription = 'free' | 'monthly' | 'yearly'
 
 export type UserRole = 'manager' | 'ceo' | 'engineer' | 'qa'
@@ -80,6 +82,9 @@ export interface IFetchAuthorizedUserResponse {
 
 export interface IFetchUsersResponse {
     result: IUserInfo[]
+    meta: {
+        pagination: IPaginationBackend
+    }
 }
 
 export interface IUserPostResponse {

@@ -1,19 +1,17 @@
 import { Request, Response, NextFunction } from 'express'
 import { ObjectId } from 'mongodb'
 import { db } from '../../services/db'
+import { AuthorizedRequest } from '../../utils/types'
 
 const collectionName = 'messages'
 
-async function get(req: Request, res: Response, next: NextFunction) {
+async function get(req: AuthorizedRequest, res: Response, next: NextFunction) {
     try {
-        const clusterId = req.params.clusterId
-        if (!clusterId) {
-            return res.sendStatus(500)
-        }
+        const userId = req.user?._id
         const items = await db
             .collection(collectionName)
             .find({
-                $or: [{ clusterId }, { clusterId: null }],
+                userId,
             })
             .toArray()
         res.json(items)

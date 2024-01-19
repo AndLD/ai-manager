@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import { db, dbService } from '../../services/db'
+import { db } from '../../services/db'
 import { usersService } from '../../services/users'
 import { apiUtils } from '../../utils/api'
 import { entities, startTimestamp } from '../../utils/constants'
