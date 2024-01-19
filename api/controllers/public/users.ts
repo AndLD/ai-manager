@@ -1,16 +1,8 @@
 import { Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { tryCatch } from '../../utils/decorators'
-import {
-    IUserState,
-    IUserPostBody,
-    IUserPost,
-} from '../../utils/interfaces/user'
-import {
-    createEmailVerificationJwt,
-    createJwt,
-    emailVerificationJwtSecret,
-} from '../../utils/jwt'
+import { IUserState, IUserPostBody, IUserPost } from '../../utils/interfaces/user'
+import { createEmailVerificationJwt, createJwt, emailVerificationJwtSecret } from '../../utils/jwt'
 import { usersService } from '../../services/users'
 import { emailService } from '../../services/email'
 import { apiUtils } from '../../utils/api'
@@ -41,6 +33,9 @@ async function postUser(req: any, res: Response) {
         subscription: createdUser.subscription,
         createdAt: createdUser.createdAt,
         updatedAt: createdUser.updatedAt,
+
+        company: createdUser.company,
+        role: createdUser.role,
     }
 
     const tokens = createJwt(userState)
@@ -71,7 +66,7 @@ async function getVerifyEmail(req: any, res: Response) {
 
         // TODO: Validate decodeValue ?
 
-        const userId = decodeValue.user._id
+        const userId = decodeValue.user.id
 
         const updatedUser = await usersService.activateUser(userId, res)
 

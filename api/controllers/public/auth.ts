@@ -44,6 +44,9 @@ async function postLogin(req: any, res: Response) {
         subscription: user.subscription,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
+
+        company: user.company,
+        role: user.role,
     }
 
     const tokens = createJwt(userState)
@@ -76,9 +79,7 @@ async function getRefresh(req: any, res: Response) {
 
     const userId = decodeValue.user._id
 
-    const user = await db
-        .collection(entities.USERS)
-        .findOne({ _id: new ObjectId(userId) })
+    const user = await db.collection(entities.USERS).findOne({ _id: new ObjectId(userId) })
 
     if (!user) {
         return res.sendStatus(401)
@@ -93,6 +94,9 @@ async function getRefresh(req: any, res: Response) {
         subscription: user.subscription,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
+
+        company: user.company,
+        role: user.role,
     }
 
     const tokens = createJwt(userState)

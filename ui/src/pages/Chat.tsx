@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
 import '../styles/Chat.css'
 
 export default function Chat() {
@@ -11,11 +10,6 @@ export default function Chat() {
 
     return (
         <>
-            <div>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
             <h1>AI Manager</h1>
             <div className="card">
                 <div className="chat"></div>

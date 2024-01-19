@@ -1,5 +1,7 @@
 export type Subscription = 'free' | 'monthly' | 'yearly'
 
+export type UserRole = 'manager' | 'ceo' | 'engineer' | 'qa'
+
 export interface IUser {
     _id: string
     name: string
@@ -12,6 +14,9 @@ export interface IUser {
     updatedAt?: number
     keywords: string[]
     user: string
+
+    company: string
+    role: UserRole
 }
 
 export interface IUserState {
@@ -23,6 +28,9 @@ export interface IUserState {
     subscription: Subscription
     createdAt: number
     updatedAt?: number
+
+    company: string
+    role: UserRole
 }
 
 export interface IUserInfo {
@@ -36,6 +44,9 @@ export interface IUserInfo {
     updatedAt?: number
     keywords?: string[]
     user?: string
+
+    company: string
+    role: UserRole
 }
 
 export interface IUserPost {
@@ -47,12 +58,18 @@ export interface IUserPost {
     subscription: Subscription
     createdAt: number
     keywords: string[]
+
+    company: string
+    role: UserRole
 }
 
 export interface IUserPostBody {
     name: string
     email: string
     password: string
+
+    company: string
+    role: UserRole
 }
 
 export type UserStatus = 'admin' | 'owner' | 'user' | 'unlimited' | 'banned'

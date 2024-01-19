@@ -8,10 +8,11 @@ export function useLogout() {
 
     const [logout] = useLogoutMutation()
 
-    return () => {
+    return (callback?: () => void) => {
         logout().then((value: any) => {
             if (value.error) {
-                errorNotification(value.error?.error, 'Не вдалося вийти з системи')
+                errorNotification(value.error?.error, 'Logout Error')
+                callback && callback()
             } else {
                 dispatch(appSlice.actions.setToken(null))
             }

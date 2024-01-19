@@ -7,6 +7,7 @@ import { parseUser } from '../utils/jwt'
 import { useToken } from '../hooks/auth'
 import { layoutContext } from '../context'
 import useLayoutContext from '../hooks/pages/layout'
+import { inactiveRoutes } from '../routes/inactive'
 
 export default function AppRoutes() {
     const token = useToken()
@@ -18,8 +19,8 @@ export default function AppRoutes() {
         const user: IUserState | null = parseUser(token)
 
         if (user && !user.active) {
-            // setRoutes(inactiveRoutes)
-            // setRedirectRoute('/forbidden')
+            setRoutes(inactiveRoutes)
+            setRedirectRoute('/forbidden')
             return
         }
 
@@ -35,21 +36,11 @@ export default function AppRoutes() {
                     break
                 case 'user':
                     setRoutes(privateRoutes)
-
-                    // if (lastOpenedCluster) {
-                    //     setRedirectRoute(`/cluster/${lastOpenedCluster}`)
-                    // } else {
                     setRedirectRoute('/chat')
-                    // }
                     break
                 case 'unlimited':
                     setRoutes(privateRoutes)
-
-                    // if (lastOpenedCluster) {
-                    //     setRedirectRoute(`/cluster/${lastOpenedCluster}`)
-                    // } else {
                     setRedirectRoute('/chat')
-                    // }
                     break
                 default:
                     // setRoutes([{ path: '/forbidden', element: <Forbidden /> }])

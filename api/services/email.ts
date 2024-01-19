@@ -30,17 +30,14 @@ async function init() {
     logger.info('Email Services successfully initialized.')
 }
 
-async function sendEmailVerification(
-    email: string,
-    emailVerificationToken: string
-) {
+async function sendEmailVerification(email: string, emailVerificationToken: string) {
     if (!transporter) {
         return
     }
 
-    const html = `Перейдіть за <a href="${FRONTEND_URL}/verification?token=${emailVerificationToken}">посиланням</a>, щоб підтвердити Email.<div><b>Посилання буде активним 24 години</b></div>`
+    const html = `Check a <a href="${FRONTEND_URL}/verification?token=${emailVerificationToken}">link</a> to verify.`
 
-    await _sendMail({ email, subject: 'Email Verification', html })
+    await _sendMail({ email, subject: 'Verification | ai manager', html })
 }
 
 async function _sendMail({
@@ -57,7 +54,7 @@ async function _sendMail({
     }
 
     await transporter.sendMail({
-        from: `Your Graph <${EMAIL_SMTP_USER}>`,
+        from: `ai manager <${EMAIL_SMTP_USER}>`,
         to: email,
         subject,
         html,

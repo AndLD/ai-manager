@@ -18,7 +18,7 @@ export default function SigninForm({ setIsSignUp }: { setIsSignUp: any }) {
                 dispatch(appSlice.actions.setToken(token))
             } else {
                 const error = value.error?.msg || value.error?.data?.error
-                errorNotification(error, 'Помилка входу в систему')
+                errorNotification(error, 'Login Error')
             }
         })
     }
@@ -42,7 +42,7 @@ export default function SigninForm({ setIsSignUp }: { setIsSignUp: any }) {
                     validationRules.PASSWORD(),
                 ]}
             >
-                <Input.Password placeholder="Password" />
+                <Input.Password placeholder="Password" visibilityToggle={false} />
             </Form.Item>
 
             <div className="button">

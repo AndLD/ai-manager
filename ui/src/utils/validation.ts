@@ -5,20 +5,21 @@ interface IValidationRules {
 }
 
 export const validationRules: IValidationRules = {
-    NAME: (message) => ({
+    NAME: message => ({
         pattern: /([A-Z][a-z\-\']{1,50})|([А-ЯЁIЇҐЄ][а-яёіїґє\-\']{1,50})/,
-        message: message || 'Невірні ім`я та прізвище'
+        message: message || 'invalid name',
     }),
-    REQUIRED: (message) => ({
+    REQUIRED: message => ({
         required: true,
-        message: message || "Поле є обов'язковим"
+        message: message || 'field is required',
     }),
-    EMAIL: (message) => ({
+    EMAIL: message => ({
         type: 'email',
-        message: message || 'Невірний email'
+        message: message || 'invalid email',
     }),
-    PASSWORD: (message) => ({
-        pattern: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$.%&@(){}[\]!?+*])(?=.*[a-zA-Z]).{6,20}$/,
-        message: message || 'Невірний пароль'
-    })
+    PASSWORD: message => ({
+        pattern:
+            /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$.%&@(){}[\]!?+*])(?=.*[a-zA-Z]).{6,20}$/,
+        message: message || 'invalid password',
+    }),
 }

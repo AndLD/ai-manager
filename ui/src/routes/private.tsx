@@ -29,10 +29,7 @@ const privateRoutes: RouteObject[] = [
     //     path: '/data',
     //     element: <Data />,
     // },
-    {
-        path: '/chat',
-        element: <Chat />,
-    },
+    { path: '/chat', element: <Chat /> },
 ]
 
 export default privateRoutes

@@ -6,35 +6,35 @@ import { useToken } from '../auth'
 import { IPagination } from '../../utils/interfaces/common'
 
 export function useFetchUsers(pagination: IPagination, callback: (result: IUserInfo[]) => void) {
-  const token = useToken()
+    const token = useToken()
 
-  const fetchUsersQuery = useFetchUsersQuery(
-    { pagination, filters: 'active,==,true' },
-    { skip: !token }
-  )
+    const fetchUsersQuery = useFetchUsersQuery(
+        { pagination, filters: 'active,==,true' },
+        { skip: !token }
+    )
 
-  useEffect(() => {
-    if (fetchUsersQuery.data) {
-      callback(fetchUsersQuery.data.result)
-    }
-  }, [fetchUsersQuery.data])
+    useEffect(() => {
+        if (fetchUsersQuery.data) {
+            callback(fetchUsersQuery.data.result)
+        }
+    }, [fetchUsersQuery.data])
 }
 
 export function useVerifyEmail(emailVerificationToken: string | null, callback: () => void) {
-  const fetchVerifyEmailQuery = useFetchVerifyEmailQuery({
-    emailVerificationToken,
-  })
+    const fetchVerifyEmailQuery = useFetchVerifyEmailQuery({
+        emailVerificationToken,
+    })
 
-  useEffect(() => {
-    if (fetchVerifyEmailQuery.isSuccess) {
-      callback()
-    }
-  }, [fetchVerifyEmailQuery.isSuccess])
+    useEffect(() => {
+        if (fetchVerifyEmailQuery.isSuccess) {
+            callback()
+        }
+    }, [fetchVerifyEmailQuery.isSuccess])
 
-  useEffect(() => {
-    if (fetchVerifyEmailQuery.isError) {
-      errorNotification('Помилка підтвердження Email')
-      callback()
-    }
-  }, [fetchVerifyEmailQuery.isError])
+    useEffect(() => {
+        if (fetchVerifyEmailQuery.isError) {
+            errorNotification('Email verification Error')
+            callback()
+        }
+    }, [fetchVerifyEmailQuery.isError])
 }

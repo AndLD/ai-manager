@@ -1,4 +1,4 @@
-const jobs: NodeJS.Timer[] = []
+const jobs: NodeJS.Timeout[] = []
 
 async function addJob(job: () => void, h: number) {
     job()
@@ -11,5 +11,5 @@ function stop() {
 
 export const cronService = {
     addJob,
-    stop
+    stop,
 }
