@@ -5,7 +5,7 @@ import { useUsersContextValue } from '../hooks/pages/users'
 import { useTitle } from '../hooks/pages/layout'
 
 function Users() {
-    useTitle('Користувачі')
+    useTitle('Users')
 
     return (
         <usersContext.Provider value={useUsersContextValue()}>

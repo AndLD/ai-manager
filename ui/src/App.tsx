@@ -22,9 +22,7 @@ function App() {
             }}
         >
             <BrowserRouter>
-                <chatContext.Provider value={useChatContextValue()}>
-                    <AppRoutes />
-                </chatContext.Provider>
+                <AppRoutes />
             </BrowserRouter>
         </ConfigProvider>
     )

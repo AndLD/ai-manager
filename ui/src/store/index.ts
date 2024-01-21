@@ -4,6 +4,7 @@ import adminReducer from './admin.reducer'
 import { privateUsersApi, publicUsersApi } from './users.api'
 import { authApi } from './auth.api'
 import { statisticsApi } from './statistics.api'
+import { privateDocsApi } from './docs.api'
 
 const rootReducer = combineReducers({
     appReducer,
@@ -12,17 +13,19 @@ const rootReducer = combineReducers({
     [privateUsersApi.reducerPath]: privateUsersApi.reducer,
     [publicUsersApi.reducerPath]: publicUsersApi.reducer,
     [statisticsApi.reducerPath]: statisticsApi.reducer,
+    [privateDocsApi.reducerPath]: privateDocsApi.reducer,
 })
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => {
+        middleware: getDefaultMiddleware => {
             return getDefaultMiddleware().concat(
                 authApi.middleware,
                 privateUsersApi.middleware,
                 publicUsersApi.middleware,
-                statisticsApi.middleware
+                statisticsApi.middleware,
+                privateDocsApi.middleware
             )
         },
     })

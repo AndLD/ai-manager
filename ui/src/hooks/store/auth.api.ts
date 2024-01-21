@@ -2,9 +2,11 @@ import { useLogoutMutation, useRefreshTokenMutation } from '../../store/auth.api
 import { appSlice } from '../../store/app.reducer'
 import { errorNotification } from '../../utils/notifications'
 import { useAppDispatch } from '.'
+import { useNavigate } from 'react-router-dom'
 
 export function useLogout() {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const [logout] = useLogoutMutation()
 
@@ -12,6 +14,7 @@ export function useLogout() {
         logout().then((value: any) => {
             if (value.error) {
                 errorNotification(value.error?.error, 'Logout Error')
+                navigate('/auth')
                 callback && callback()
             } else {
                 dispatch(appSlice.actions.setToken(null))

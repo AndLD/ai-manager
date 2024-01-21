@@ -9,7 +9,7 @@ function UsersSearch() {
     const [isTableLoading, setIsTableLoading] = useContext(usersContext).isTableLoadingState
     const [searchValue, setSearchValue] = useContext(usersContext).searchValueState
     const [statusFilter, setStatusFilter] = useContext(usersContext).statusFilterState
-    const [delayedSearch, setDeleyedSearch] = useState<NodeJS.Timeout>()
+    const [delayedSearch, setDelayedSearch] = useState<NodeJS.Timeout>()
 
     const [isFetchUsersQuerySkip, setIsFetchUsersQuerySkip] = useState(true)
     const fetchUsersQuery = useFetchUsersQuery(
@@ -36,7 +36,7 @@ function UsersSearch() {
     return (
         <Search
             style={{ marginBottom: 20 }}
-            placeholder="Пошук по імені або email"
+            placeholder="Search by name, company, role or email"
             loading={isTableLoading}
             value={searchValue}
             onChange={event => {
@@ -50,7 +50,7 @@ function UsersSearch() {
                     clearTimeout(delayedSearch)
                 }
 
-                setDeleyedSearch(
+                setDelayedSearch(
                     setTimeout(() => {
                         setIsFetchUsersQuerySkip(false)
                     }, 500)

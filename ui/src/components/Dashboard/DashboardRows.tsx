@@ -3,8 +3,8 @@ import {
     ClockCircleOutlined,
     CoffeeOutlined,
     DollarOutlined,
-    ExperimentOutlined,
     FileProtectOutlined,
+    MessageOutlined,
     SafetyCertificateOutlined,
     StopOutlined,
     UserOutlined,
@@ -55,7 +55,7 @@ export default function DashboardRows() {
                 <DashboardCol
                     title="Messages"
                     value={statistics.messagesTotal}
-                    icon={<ExperimentOutlined />}
+                    icon={<MessageOutlined />}
                 />
             </DashboardRow>
             <DashboardRow>

@@ -1,7 +1,21 @@
-.auth-page {
+body {
     width: 100%;
     height: 100vh;
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,185,107,1) 100%);
+}
+
+.auth-page {
+    width: 100%;
+    height: 100vh;
+}
+
+.flex-layout {
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    transform: translate(300px,200px);
+    display: flex;
+    width: 1000px;
+    gap: 100px;
 }
 
 .auth-card {
@@ -9,5 +23,69 @@
     background: white;
     padding: 30px 60px 64px;
     border-radius: 5px;
-    transform: translate(300px,200px);
+    box-shadow: 10px 10px 18px -9px rgba(0,0,0,0.5);
+}
+
+.dynamic-logo {
+    display: flex;
+    width: 660px;
+    position: relative;
+    transition: all ease 0.3s;
+}
+
+.dynamic-logo-block {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 30px solid;
+    border-radius: 50%;
+    /*box-shadow: 10px 10px 18px -9px rgba(0,0,0,0.5);*/
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 120px;
+    font-weight: bold;
+
+    transition: all ease 1s;
+}
+
+.dynamic-logo-block.left {
+    border-color: forestgreen;
+    border-right: none;
+    border-bottom: none;
+    /*animation: rotateRight 20s linear infinite;*/
+}
+
+.dynamic-logo-block.right {
+    border-color: #213547;
+    left: 20%;
+    border-left: none;
+    border-top: none;
+    /*animation: rotateRight 20s linear infinite;*/
+}
+
+.dynamic-logo:hover .dynamic-logo-block.right {
+    left: 0;
+}
+
+@keyframes rotateRight {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateLeft {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }

@@ -32,23 +32,6 @@ async function post(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-async function put(req: Request, res: Response, next: NextFunction) {
-    // const { from, to } = req.body
-    // const id = req.params.id
-    // if (!id || !from || !to) {
-    //     return next(new Error('Missing parameters'))
-    // }
-    // try {
-    //     const newValues = { $set: { from, to } }
-    //     const result = await db
-    //         .collection(collectionName)
-    //         .updateOne({ _id: new ObjectId(id) }, newValues)
-    //     res.json(result)
-    // } catch (error) {
-    //     next(error)
-    // }
-}
-
 async function deleteOne(req: Request, res: Response, next: NextFunction) {
     // const id = req.params.id
     // if (!id) {
@@ -67,6 +50,5 @@ async function deleteOne(req: Request, res: Response, next: NextFunction) {
 export const messagesControllers = {
     get,
     post,
-    put,
     deleteOne,
 }

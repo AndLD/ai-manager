@@ -15,10 +15,17 @@ export default function Auth() {
 
     return (
         <div className="auth-page">
-            <div className="auth-card">
-                <h1>{title}</h1>
-                {form}
-            </div>
+            <span className="flex-layout">
+                <div className="auth-card">
+                    <h1>{title}</h1>
+                    {form}
+                </div>
+
+                <div className="dynamic-logo">
+                    <div className="dynamic-logo-block left" />
+                    <div className="dynamic-logo-block right" />
+                </div>
+            </span>
 
             <div className="corner-block">
                 <div style={{ fontSize: 60, fontWeight: 'bold' }}>ai manager</div>

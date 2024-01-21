@@ -4,6 +4,7 @@ import Dashboard from '../pages/Dashboard'
 import AdminLayout from '../components/AdminLayout/AdminLayout'
 // import Settings from '../pages/Settings'
 import Users from '../pages/Users'
+import Docs from '../pages/Docs'
 
 const privateRoutes: RouteObject[] = [
     {
@@ -18,17 +19,13 @@ const privateRoutes: RouteObject[] = [
                 path: '/admin/users',
                 element: <Users />,
             },
-            // {
-            //     path: '/settings',
-            //     element: <Settings />
-            // }
         ],
     },
 
-    // {
-    //     path: '/data',
-    //     element: <Data />,
-    // },
+    {
+        path: '/docs',
+        element: <Docs />,
+    },
     { path: '/chat', element: <Chat /> },
 ]
 

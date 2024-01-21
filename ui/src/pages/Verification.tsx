@@ -16,7 +16,7 @@ export default function Verification() {
     // const refreshToken = useRefreshToken(() => setIsLoading(false))
 
     useVerifyEmail(emailVerificationToken, () => {
-        logout(() => navigate('/auth'))
+        logout()
         // if (token) {
         //     refreshToken()
         // } else {

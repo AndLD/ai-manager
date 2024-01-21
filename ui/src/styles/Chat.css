@@ -1,9 +1,8 @@
 input.chat-input {
-    border-radius: 8px;
+    border-radius: 2px;
     border: 1px solid transparent;
     padding: 0.6em;
     font-size: 1em;
-    font-weight: 500;
     font-family: inherit;
     background-color: #f9f9f9;
     transition: border-color 0.25s;
@@ -12,15 +11,110 @@ input.chat-input {
 }
 
 .chat {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #f9f9f9;
-    transition: border-color 0.25s;
+    /*border-radius: 2px;*/
+    /*border: 1px solid transparent;*/
+    /*padding: 0.6em;*/
+    /*font-size: 1em;*/
+    /*font-family: inherit;*/
+    /*background-color: #f9f9f9;*/
+    /*transition: border-color 0.25s;*/
     margin-bottom: 10px;
-    outline: none;
-    min-height: 200px;
+    /*outline: none;*/
+    height: 70vh;
+
+    background: rgba(255, 255, 255, 0.32);
+    border-radius: 2px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.chat .message-wrapper {
+    margin-bottom: 10px;
+}
+
+.chat .message-wrapper.left {
+    text-align: left;
+}
+
+.chat .message-wrapper.right {
+    text-align: right;
+}
+
+
+.chat .message-wrapper.left .message {
+    margin: 10px 0 0 10px;
+}
+
+.chat .message-wrapper.right .message {
+    margin: 10px 10px 0 0;
+}
+
+.chat .message-wrapper .message {
+    display: inline-block;
+    min-height: 30px;
+    max-width: 70%;
+    color: white;
+    padding: 10px 10px 5px;
+    background: rgba(0,0,0, 0.1);
+    border-radius: 5px;
+}
+
+.chat .message .message-avatar {
+    display: inline-block;
+    font-size: 30px;
+    background: white;
+    color: black;
+    padding: 3px 10px;
+    border-radius: 50%;
+}
+
+.chat .message-wrapper.left .message .message-time {
+    text-align: right;
+}
+
+.chat .message-wrapper .message .message-text {
+    margin: 5px 0;
+}
+
+.chat .message-wrapper.right .message {
+    text-align: right;
+}
+
+.side-button-wrapper {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.side-button {
+    font-size: 50px;
+    padding: 8px 20px;
+    border-radius: 0 50% 50% 0;
+    border-left: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: rgba(0,185,107);
+    color: white;
+}
+
+.side-button:hover {
+    transform: translateX(15px);
+    border-radius: 50%;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-card {
+    width: 30%;
+    max-width: 800px;
 }
