@@ -9,7 +9,7 @@ export interface IDoc {
     title: string
     type: DocType
     arguments: DocArguments | null
-    references: string[]
+    reference: string
     createdAt: number
     updatedAt?: number
 }
@@ -17,7 +17,7 @@ export interface IDoc {
 export interface IDocPostBody {
     title: string
     type: DocType
-    references: string[]
+    reference: string
 }
 
 export interface IDocPostResponse {

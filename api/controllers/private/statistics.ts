@@ -4,6 +4,8 @@ import { usersService } from '../../services/users'
 import { apiUtils } from '../../utils/api'
 import { entities, startTimestamp } from '../../utils/constants'
 import { tryCatch } from '../../utils/decorators'
+import { Utils } from '../../utils/utils'
+import path from 'path'
 
 async function getStatistics(_: any, res: Response) {
     const usersByStatus = await usersService.countUsersByState(res)
@@ -21,10 +23,13 @@ async function getStatistics(_: any, res: Response) {
         totals[key] = await db.collection(collection).countDocuments()
     }
 
+    const indexesSizeTotal = Utils.getDirectorySizeSync(path.join(__dirname, '../../../store'))
+
     const result = {
         usersByStatus,
         ...totals,
         startTimestamp,
+        indexesSizeTotal,
     }
 
     apiUtils.sendResult(res, result)

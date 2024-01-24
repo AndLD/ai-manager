@@ -5,6 +5,7 @@ import { privateUsersApi, publicUsersApi } from './users.api'
 import { authApi } from './auth.api'
 import { statisticsApi } from './statistics.api'
 import { privateDocsApi } from './docs.api'
+import { privateMessagesApi } from './messages.api'
 
 const rootReducer = combineReducers({
     appReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     [publicUsersApi.reducerPath]: publicUsersApi.reducer,
     [statisticsApi.reducerPath]: statisticsApi.reducer,
     [privateDocsApi.reducerPath]: privateDocsApi.reducer,
+    [privateMessagesApi.reducerPath]: privateMessagesApi.reducer,
 })
 
 export const setupStore = () => {
@@ -25,7 +27,8 @@ export const setupStore = () => {
                 privateUsersApi.middleware,
                 publicUsersApi.middleware,
                 statisticsApi.middleware,
-                privateDocsApi.middleware
+                privateDocsApi.middleware,
+                privateMessagesApi.middleware
             )
         },
     })

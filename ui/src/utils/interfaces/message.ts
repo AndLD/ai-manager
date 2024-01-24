@@ -4,5 +4,21 @@ export interface IMessage {
     _id: ID
     text: string
     side: 'user' | 'ai'
-    timestamp: number
+    createdAt: number
+}
+
+export interface IMessagePostBody {
+    text: string
+    createdAt: number
+}
+
+export interface IMessagePostResponse {
+    result: {
+        message: IMessage
+        answer: IMessage
+    }
+}
+
+export interface IFetchMessagesResponse {
+    result: IMessage[]
 }

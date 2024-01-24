@@ -31,7 +31,13 @@ export const privateDocsApi = createApi({
                 },
             }),
         }),
+        deleteDoc: builder.mutation<IDocPostResponse, { id: string }>({
+            query: ({ id }) => ({
+                method: 'DELETE',
+                url: `/api/private/docs/${id}`,
+            }),
+        }),
     }),
 })
 
-export const { useFetchDocsQuery, usePostDocMutation } = privateDocsApi
+export const { useFetchDocsQuery, usePostDocMutation, useDeleteDocMutation } = privateDocsApi

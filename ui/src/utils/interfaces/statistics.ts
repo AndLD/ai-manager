@@ -5,6 +5,7 @@ export interface IStatistics {
     usersByStatus: { [key in UserStatus]: number }
     messagesTotal: number
     docsTotal: number
+    indexesSizeTotal: number
 }
 
 export interface IFetchStatisticsResponse {

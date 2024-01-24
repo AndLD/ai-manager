@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import {
     ClockCircleOutlined,
+    CloudServerOutlined,
     CoffeeOutlined,
     DollarOutlined,
     FileProtectOutlined,
@@ -56,6 +57,15 @@ export default function DashboardRows() {
                     title="Messages"
                     value={statistics.messagesTotal}
                     icon={<MessageOutlined />}
+                />
+                <DashboardCol
+                    title="Indexes Size"
+                    value={`${
+                        (statistics.indexesSizeTotal < 1
+                            ? statistics.indexesSizeTotal * 1024
+                            : statistics.indexesSizeTotal) || 0
+                    } ${statistics.indexesSizeTotal < 1 ? 'KB' : 'MB'}`}
+                    icon={<CloudServerOutlined />}
                 />
             </DashboardRow>
             <DashboardRow>

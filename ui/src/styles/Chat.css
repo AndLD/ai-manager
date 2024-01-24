@@ -27,6 +27,21 @@ input.chat-input {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+
+    overflow-y: scroll;
+}
+
+.chat::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+.chat::-webkit-scrollbar-thumb {
+    background-color: #4CAF5060 !important; /* Change color as needed */
+    border-radius: 6px !important;
+}
+
+.chat::-webkit-scrollbar-track {
+    background-color: #4CAF5030; /* Change color as needed */
 }
 
 .chat .message-wrapper {
@@ -54,13 +69,14 @@ input.chat-input {
     display: inline-block;
     min-height: 30px;
     max-width: 70%;
+    min-width: 30%;
     color: white;
     padding: 10px 10px 5px;
     background: rgba(0,0,0, 0.1);
     border-radius: 5px;
 }
 
-.chat .message .message-avatar {
+.chat .message-avatar {
     display: inline-block;
     font-size: 30px;
     background: white;
@@ -69,15 +85,12 @@ input.chat-input {
     border-radius: 50%;
 }
 
-.chat .message-wrapper.left .message .message-time {
-    text-align: right;
-}
-
 .chat .message-wrapper .message .message-text {
     margin: 5px 0;
+    text-align: left;
 }
 
-.chat .message-wrapper.right .message {
+.chat .message-wrapper .message .message-time {
     text-align: right;
 }
 
@@ -104,6 +117,7 @@ input.chat-input {
 .side-button:hover {
     transform: translateX(15px);
     border-radius: 50%;
+    background: #20C77C;
 }
 
 .chat-container {

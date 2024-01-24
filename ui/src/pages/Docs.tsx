@@ -2,9 +2,13 @@ import SideButtonWrapper from '../components/SideButtonWrapper'
 import DocsTable from '../components/Docs/DocsTable'
 import { useDocsContextValue } from '../hooks/pages/docs'
 import { docsContext } from '../context'
-import React from 'react'
+import React, { useState } from 'react'
+import AddDocModal from '../components/Docs/AddDocModal'
+import DocsControls from '../components/Docs/DocsControls'
 
 export default function Docs() {
+    const isOpenModalState = useState(false)
+
     return (
         <docsContext.Provider value={useDocsContextValue()}>
             <div
@@ -15,9 +19,11 @@ export default function Docs() {
                     justifyContent: 'center',
                 }}
             >
-                <div style={{ maxWidth: '80vw', marginTop: 50 }}>
-                    <div style={{ fontSize: 50, marginBottom: 15 }}>Docs</div>
+                <div style={{ marginTop: 50 }}>
+                    <div style={{ fontSize: 50, marginBottom: 10 }}>Docs</div>
+                    <DocsControls isOpenModalState={isOpenModalState} />
                     <DocsTable />
+                    <AddDocModal isModalOpenState={isOpenModalState} />
                 </div>
             </div>
             <SideButtonWrapper />

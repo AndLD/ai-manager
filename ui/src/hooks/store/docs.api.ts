@@ -3,8 +3,8 @@ import { useToken } from '../auth'
 import { useContext, useEffect } from 'react'
 import { docsContext } from '../../context'
 import { errorNotification } from '../../utils/notifications'
-import { IDocPostBody, IFetchDocsResponse } from '../../utils/interfaces/doc'
-import { useFetchDocsQuery, usePostDocMutation } from '../../store/docs.api'
+import { IDoc, IDocPostBody, IFetchDocsResponse } from '../../utils/interfaces/doc'
+import { useDeleteDocMutation, useFetchDocsQuery, usePostDocMutation } from '../../store/docs.api'
 
 export function useFetchDocs(
     pagination: IPagination,
@@ -24,10 +24,10 @@ export function useFetchDocs(
 export function usePostDoc() {
     const [tableData, setTableData] = useContext(docsContext).tableDataState
 
-    const [putUserMutation] = usePostDocMutation()
+    const [putDocMutation] = usePostDocMutation()
 
     return (body: IDocPostBody) =>
-        putUserMutation({
+        putDocMutation({
             body,
         }).then((value: any) => {
             if (value.data) {
@@ -41,6 +41,30 @@ export function usePostDoc() {
             } else {
                 const error = value.error?.msg || value.error?.data?.error
                 errorNotification(error, 'Failed to add doc')
+            }
+        })
+}
+
+export function useDeleteDoc() {
+    const [tableData, setTableData] = useContext(docsContext).tableDataState
+
+    const [putDocMutation] = useDeleteDocMutation()
+
+    return (id: string) =>
+        putDocMutation({
+            id,
+        }).then((value: any) => {
+            if (value.data) {
+                const _id: string = value.data._id
+
+                if (_id === id) {
+                    setTableData(tableData.filter(row => row._id !== id))
+                } else {
+                    errorNotification('Doc was not deleted', 'Delete doc Error')
+                }
+            } else {
+                const error = value.error?.msg || value.error?.data?.error
+                errorNotification(error, 'Failed to delete doc')
             }
         })
 }

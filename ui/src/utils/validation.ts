@@ -7,19 +7,19 @@ interface IValidationRules {
 export const validationRules: IValidationRules = {
     NAME: message => ({
         pattern: /([A-Z][a-z\-\']{1,50})|([А-ЯЁIЇҐЄ][а-яёіїґє\-\']{1,50})/,
-        message: message || 'invalid name',
+        message: message || 'Invalid name',
     }),
     REQUIRED: message => ({
         required: true,
-        message: message || 'field is required',
+        message: message || 'Field is required',
     }),
     EMAIL: message => ({
         type: 'email',
-        message: message || 'invalid email',
+        message: message || 'Invalid email',
     }),
     PASSWORD: message => ({
         pattern:
             /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-#$.%&@(){}[\]!?+*])(?=.*[a-zA-Z]).{6,20}$/,
-        message: message || 'invalid password',
+        message: message || 'Invalid password',
     }),
 }

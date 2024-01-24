@@ -45,7 +45,7 @@ async function put(req: Request, res: Response, next: NextFunction) {
             )
 
         if (updateResult.modifiedCount === 0) {
-            throw new Error('User was not updated')
+            return next(new Error('User was not updated'))
         }
 
         const result = await db.collection(collectionName).findOne({ _id: new ObjectId(id) })

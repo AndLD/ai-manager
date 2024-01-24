@@ -1,5 +1,5 @@
 import { Layout, Typography } from 'antd'
-import logo from '../../assets/images/logo-dnuvs.png'
+import logo from '../../assets/images/logo.png'
 import '../../styles/AdminLayout.scss'
 import AdminHeader from './AdminHeader'
 import AdminMenu from './AdminMenu'
@@ -30,7 +30,7 @@ function AdminLayout() {
         <Layout style={{ minHeight: '100vh' }}>
             <Sider trigger={null} collapsed={isMenuCollapsed}>
                 <div className="logo">
-                    <img src={logo} alt="Admin Page Logo" />
+                    <img style={{ borderRadius: 10 }} src={logo} alt="Admin Page Logo" />
                     <div
                         style={{
                             opacity: isMenuCollapsed ? 0 : 1,
