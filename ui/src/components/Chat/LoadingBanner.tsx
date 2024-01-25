@@ -10,6 +10,9 @@ export default function LoadingBanner() {
             {isLoading && (
                 <div
                     style={{
+                        position: 'absolute',
+                        width: '100%',
+                        bottom: 0,
                         display: 'flex',
                         justifyContent: 'center',
                         background: 'rgba(0,0,0,0.1)',

@@ -8,6 +8,7 @@ import { usePostMessage } from '../../hooks/store/messages.api'
 import LoadingBanner from './LoadingBanner'
 
 export default function ChatContainer() {
+    const [isLoading, setIsLoading] = useContext(chatContext).isLoadingState
     const [docs, setDocs] = useContext(chatContext).docsState
     const [messages, setMessages] = useContext(chatContext).messagesState
     const [message, setMessage] = useState('')
@@ -21,7 +22,7 @@ export default function ChatContainer() {
     useEffect(() => {
         // Scroll to the bottom when messages change
         scrollToBottom()
-    }, [messages])
+    }, [messages, isLoading])
 
     const scrollToBottom = () => {
         if (chatContainerRef.current) {
@@ -54,10 +55,14 @@ export default function ChatContainer() {
         <div className="chat-container">
             <div className="chat-card">
                 <div style={{ fontSize: 50, marginBottom: 15 }}>Chat</div>
-                <div ref={chatContainerRef} className="chat">
-                    {messages.map((message: IMessage) => (
-                        <Message key={message._id} message={message} />
-                    ))}
+                <div style={{ position: 'relative' }}>
+                    <div ref={chatContainerRef} className="chat">
+                        {messages.map((message: IMessage) => (
+                            <Message key={message._id} message={message} />
+                        ))}
+
+                        {isLoading && <div style={{ height: 44 }} />}
+                    </div>
                     <LoadingBanner />
                 </div>
                 <div style={{ display: 'flex' }}>

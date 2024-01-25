@@ -62,10 +62,11 @@ def docs_to_indexes(userId, docs, forceRebuild=False):
             loader = Reader(**DATA_SOURCE_READERS[doc['type']]['arguments'])
 
             sanitizer = DATA_SOURCE_READERS[doc['type']]['reference-sanitizer']
+            reference = sanitizer(doc['reference']) if sanitizer is not None else doc['reference']
 
-            print(sanitizer(doc['reference']))
+            print(reference)
 
-            documents = loader.load_data( [ sanitizer(doc['reference']) if sanitizer is not None else doc['reference'] ] )
+            documents = loader.load_data([ reference ])
 
             index = GPTVectorStoreIndex.from_documents(documents, service_context=service_context)
 
