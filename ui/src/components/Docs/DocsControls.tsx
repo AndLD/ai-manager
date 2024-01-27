@@ -8,7 +8,7 @@ import { parseUser } from '../../utils/jwt'
 import { errorNotification, successNotification } from '../../utils/notifications'
 
 export default function DocsControls({ isOpenModalState }: { isOpenModalState: any }) {
-    const [tableData] = useContext(docsContext).tableDataState
+    const [tableData, setTableData] = useContext(docsContext).tableDataState
     const [isRebuildLoading, setIsRebuildLoading] = useState<boolean>(false)
     const token = useToken()
 
@@ -18,7 +18,17 @@ export default function DocsControls({ isOpenModalState }: { isOpenModalState: a
         setIsRebuildLoading(true)
         axios.post('http://127.0.0.1:8081/api/docs/rebuild', { userId: user?._id }).then(value => {
             setIsRebuildLoading(false)
-            if (value.data.result === true) {
+
+            if (value.data.result.ok === true) {
+                if (value.data.result.updatedAt) {
+                    setTableData(
+                        tableData.map(row => ({
+                            ...row,
+                            updatedAt: value.data.result.updatedAt,
+                        }))
+                    )
+                }
+
                 successNotification('Docs were rebuilt successfully', 'Rebuild Docs Success')
             } else {
                 errorNotification('Docs were not rebuilt', 'Rebuild Docs Error')

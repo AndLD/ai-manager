@@ -5,16 +5,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import run
 from pydantic import BaseModel
+import time
 from db import init, db
-from ai import query, docs_to_indexes
 
 init()
 
+from ai import query, docs_to_indexes
+
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173"
-]
+origins = ["http://localhost:5173"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,12 +43,20 @@ async def create_message(msg: PostMessage):
 
 @app.post("/api/docs/rebuild")
 async def rebuild_docs(body: PostRebuildDocs):
-    cursor = db.docs.find({"userId": body.userId})
-    docs = list(cursor)
+    try:
+        cursor = db.docs.find({"userId": body.userId})
+        docs = list(cursor)
 
-    docs_to_indexes(body.userId, docs, True)
+        docs_to_indexes(body.userId, docs, True, False)
 
-    return {"result": True}
+        updatedAt = int(time.time()) * 1000
+
+        db.docs.update_many({"userId": body.userId}, {"$set": {"updatedAt": updatedAt}})
+
+        return {"result": {"ok": True, "updatedAt": updatedAt}}
+    except Exception as e:
+        print(e)
+        return {"result": {"ok": False}}
 
 if __name__ == "__main__":
     run('main:app', host="127.0.0.1", port=8081, reload=False)

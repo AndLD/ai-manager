@@ -8,12 +8,14 @@ os.environ['OPENAI_API_KEY'] = load_env_key('OPENAI_API_KEY')
 from llama_index import download_loader, SimpleDirectoryReader, StorageContext, GPTVectorStoreIndex, download_loader, load_index_from_storage, load_indices_from_storage, readers, LLMPredictor, ServiceContext
 from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.query_engine import SubQuestionQueryEngine
-from llama_index.readers import SimpleWebPageReader, GoogleDocsReader
+from llama_index.readers import SimpleWebPageReader
 
 from llama_index.llms import OpenAI
 
 from google_sheets_reader import GoogleSheetsReader
-# GoogleDocsReader = download_loader('GoogleDocsReader')
+from google_docs_reader import GoogleDocsReader
+
+from db import db
 
 DATA_SOURCE_TYPES = ['google-sheets']
 DATA_SOURCE_READERS = {
@@ -29,11 +31,12 @@ DATA_SOURCE_READERS = {
     },
     'web-page': {
         'reader': SimpleWebPageReader,
-        'arguments': {}
+        'arguments': {},
+        'reference-sanitizer': None
     }
 }
 
-def docs_to_indexes(userId, docs, forceRebuild=False):
+def docs_to_indexes(userId, docs, forceRebuild=False, setUpdatedAt=True):
     indexes = []
 
     userStoreFolder = f"../store/{userId}"
@@ -78,6 +81,10 @@ def docs_to_indexes(userId, docs, forceRebuild=False):
             indexes.append(index)
 
         print('\nStorage directory size: ', folder_size(userStoreFolder), '\n')
+
+        if setUpdatedAt:
+            updatedAt = int(time.time()) * 1000
+            db.docs.update_many({"userId": userId}, {"$set": {"updatedAt": updatedAt}})
     elif (os.path.exists(userStoreFolder)):
         subfolder_names = get_subfolder_names(userStoreFolder)
 
